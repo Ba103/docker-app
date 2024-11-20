@@ -1,9 +1,14 @@
-FROM eclipse-temurin:17
+# Use a lightweight Java image
+FROM openjdk:17-jdk-slim
 
-LABEL mentainer="balajir9966@gmail.com"
-
+# Set the working directory inside the container
 WORKDIR /app
 
-COPY  target/springboot-docker-demo-0.0.1-SNAPSHOT.jar /app/springboot-docker-demo.jar
+# Copy the Spring Boot JAR file into the container
+COPY target/springboot-docker-demo-0.0.1-SNAPSHOT.jar app.jar
 
-ENTRYPOINT ["java", "-jar", "springboot-docker-demo.jar"]
+# Expose the port the application runs on
+EXPOSE 8080
+
+# Command to run the application
+ENTRYPOINT ["java", "-jar", "app.jar"]
